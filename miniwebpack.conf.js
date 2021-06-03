@@ -1,4 +1,4 @@
-module.export = {
+module.exports = {
     entry: './demo/main.js',
     output: {
         filePath: './build',

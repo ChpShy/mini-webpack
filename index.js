@@ -1,9 +1,11 @@
-
-
-class MiniWebpack {
-
+const Emitter = require('./emitter.js');
+console.log(Emitter)
+class MiniWebpack extends Emitter {
+    constructor(options) {
+        super();
+    }
 }
 
-module.export = function (options) {
+module.exports = function (options) {
     return new MiniWebpack(options);
 };
