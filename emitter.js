@@ -1,22 +1,28 @@
 class EmitterWrapper {
-    constructor() {
-        this.events = {};
+    constructor(name) {
+        this.name = name;
+        this.events = [];
     }
-    plugin(e, callback) {
-        if (this.events[e]) {
-            this.events[e].push(callback);
-        } else {
-            this.events[e] = [callback];
-        }
+    tap(name, callback) {
+        this.events.push({
+            name,
+            callback
+        });
     }
-    flush(e, ...args) {
-        let cbs = this.events[e];
-        if (cbs) {
-            cbs.forEach(cb => {
-                cb(...args);
-            })
+    call() {
+        let callback = null;
+        let args = [];
+        if (arguments.length > 1) {
+            args = arguments.slice(0, arguments.length - 1);
+            callback = arguments.slice(-1);
+        } else if (arguments.length) {
+            args = arguments.slice(0);
         }
+        let cbs = this.events;
+        cbs.forEach(c => {
+            c.callback(...args);
+        });
+        callback && callback();
     }
 }
 module.exports = EmitterWrapper;
-// module.export = EmitterWrapper;

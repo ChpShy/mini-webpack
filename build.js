@@ -1,9 +1,4 @@
 const miniWebpack = require('./index');
+const options = require('./miniwebpack.conf');
 
-let mw = miniWebpack({});
-
-mw.plugin('event', (...args) => {
-    console.log(...args);
-});
-
-mw.flush('event', '1', '2', '3');
+let compiler = miniWebpack(options);
