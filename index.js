@@ -1,14 +1,20 @@
 const Compiler = require('./compiler');
+const WebpackOptionsApply = require('./WebpackOptionsApply');
 
 function normalizeOptions(options) {
-    options.context = process.cwd();
-    options.plugins = options.plugins || [];
+    return {
+        ...options,
+        context: process.cwd(),
+        plugins: options.plugins || []
+    }
 }
 
-function miniWebpack(options, callback) {
-    normalizeOptions(options);
+function miniWebpack(rawOptions, callback) {
+    let options = normalizeOptions(rawOptions);
+    options.context = process.cwd();
     let {plugins} = options;
     let compiler = new Compiler(options);
+    new WebpackOptionsApply().process(options, compiler);
     // 注册插件
     plugins.forEach(plugin => {
         if (typeof plugin === 'function') {
@@ -17,9 +23,7 @@ function miniWebpack(options, callback) {
             plugin.apply(compiler);
         }
     });
-    console.log(options.context);
-    compiler.initialize.call();
-
+    compiler.hooks.initialize.call();
     if (callback) {
         compiler.run((err, stats) => {
             compiler.close((err2) => {

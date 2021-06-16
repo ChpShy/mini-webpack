@@ -1,7 +1,7 @@
 
 class Plugin1 {
     apply(compiler) {
-        compiler.initialize.tap('initialize', () => {
+        compiler.hooks.initialize.tap('initialize', () => {
             console.log('initialize emited');
         })
     }

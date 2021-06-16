@@ -13,10 +13,10 @@ class EmitterWrapper {
         let callback = null;
         let args = [];
         if (arguments.length > 1) {
-            args = arguments.slice(0, arguments.length - 1);
-            callback = arguments.slice(-1);
+            args = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
+            callback = Array.prototype.slice.call(arguments, -1)[0];
         } else if (arguments.length) {
-            args = arguments.slice(0);
+            args = Array.prototype.slice.call(arguments, 0);
         }
         let cbs = this.events;
         cbs.forEach(c => {
