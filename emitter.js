@@ -13,8 +13,13 @@ class EmitterWrapper {
         let callback = null;
         let args = [];
         if (arguments.length > 1) {
-            args = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
-            callback = Array.prototype.slice.call(arguments, -1)[0];
+            let last = Array.prototype.slice.call(arguments, -1)[0];
+            if (typeof last === 'function') {
+                callback = last;
+                args = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
+            } else {
+                args = arguments;
+            }
         } else if (arguments.length) {
             args = Array.prototype.slice.call(arguments, 0);
         }
@@ -22,7 +27,7 @@ class EmitterWrapper {
         cbs.forEach(c => {
             c.callback(...args);
         });
-        callback && callback();
+        typeof callback === 'function' && callback();
     }
 }
 module.exports = EmitterWrapper;

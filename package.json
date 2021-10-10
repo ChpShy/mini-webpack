@@ -17,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/ChpShy/mini-webpack/issues"
   },
-  "homepage": "https://github.com/ChpShy/mini-webpack#readme"
+  "homepage": "https://github.com/ChpShy/mini-webpack#readme",
+  "dependencies": {
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/parser": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/traverse": "^7.15.4"
+  }
 }

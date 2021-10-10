@@ -2,9 +2,9 @@
 
 ## 功能清单
 
-- loader/plugin
-- 编译原理: ast -> transform -> generate
-- 依赖解析
-- 缓存
+- [x] loader/plugin
+- [ ]编译原理: ast -> transform -> generate
+- [x]依赖解析
+- [ ]缓存
 - watch
-- 事件机制
+- [x]事件机制

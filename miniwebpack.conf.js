@@ -1,4 +1,5 @@
-const plugin1 = require('./plugin1');
+const plugin1 = require('./plugins/test-plugin');
+const babelLoader = require('./loaders/babel-loader');
 
 module.exports = {
     entry: './demo/main.js',
@@ -7,7 +8,10 @@ module.exports = {
     },
     module: {
         rules: [
-            
+            { 
+                test: /\.js$/,
+                use: [babelLoader]
+            }
         ]
     },
     plugins: [
